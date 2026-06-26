@@ -152,4 +152,14 @@ export const mockShifts: StoreShift[] = [
     startAt: "17:00",
     endAt: "22:00",
   },
+  {
+    id: "shift-015",
+    date: "2026-06-27",
+    employeeName: "이지은",
+    role: "파트타이머",
+    area: "support",
+    time: "afternoon",
+    startAt: "12:00",
+    endAt: "17:00",
+  },
 ];

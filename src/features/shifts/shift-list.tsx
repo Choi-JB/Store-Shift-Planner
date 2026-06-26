@@ -9,12 +9,17 @@ import {
   TIME_LABELS,
 } from "./constants";
 import { useShiftPlannerStore } from "./store";
-import { getShiftsByDate } from "./utils";
+import {
+  computeShiftLanes,
+  getShiftsByDate,
+  type ShiftLaneLayout,
+} from "./utils";
 
 const TIMETABLE_START_HOUR = 8;
 const TIMETABLE_END_HOUR = 23;
 const HOUR_HEIGHT_PX = 52;
 const COLUMN_MIN_WIDTH_PX = 120;
+const LANE_GAP_PX = 3;
 
 //시간 문자열을 분으로 변환 함수 : "09:00" -> 540
 function parseTimeToMinutes(time: string): number {
@@ -52,11 +57,13 @@ const timelineHeightPx =
 //근무 카드 컴포넌트 : 근무 카드를 표시하는 컴포넌트
 function ShiftCard({
   shift,
+  lane,
   isSelected,
   expanded,
   onSelect,
 }: {
   shift: StoreShift;
+  lane: ShiftLaneLayout;
   isSelected: boolean;
   expanded?: boolean;
   onSelect: () => void;
@@ -68,17 +75,24 @@ function ShiftCard({
     shift.endAt,
     dayStartMinutes,
   );
+  const showTime =
+    (expanded || height >= 64) && !(lane.totalColumns >= 2 && height < 64);
 
   return (
     <button
       type="button"
       onClick={onSelect}
-      style={{ top, height }}
+      style={{
+        top,
+        height,
+        left: `calc(${lane.leftPercent}% + ${LANE_GAP_PX}px)`,
+        width: `calc(${lane.widthPercent}% - ${LANE_GAP_PX * 2}px)`,
+      }}
       className={`absolute overflow-hidden rounded-lg border text-left transition ${
-        expanded ? "inset-x-3 px-4 py-2" : "inset-x-1 px-2 py-1.5"
+        expanded ? "px-4 py-2" : "px-2 py-1.5"
       } ${
         isSelected
-          ? "z-10 border-slate-900 bg-slate-900 text-white shadow-md ring-2 ring-slate-900 ring-offset-1"
+          ? "z-10 border-blue-400 bg-blue-50 shadow-md ring-2 ring-blue-400 ring-offset-1"
           : `bg-white hover:border-slate-300 hover:shadow-sm ${colors.border}`
       }`}
     >
@@ -87,21 +101,21 @@ function ShiftCard({
           <p
             className={`truncate font-semibold ${
               expanded ? "text-base" : "text-sm"
-            } ${isSelected ? "text-white" : "text-slate-900"}`}
+            } ${isSelected ? "text-blue-900" : "text-slate-900"}`}
           >
             {shift.employeeName}
           </p>
           <p
             className={`truncate text-xs ${
-              isSelected ? "text-slate-300" : "text-slate-500"
+              isSelected ? "text-blue-700" : "text-slate-500"
             }`}
           >
             {shift.role}
           </p>
-          {(expanded || height >= 64) && (
+          {showTime && (
             <p
               className={`mt-1 truncate text-xs ${
-                isSelected ? "text-slate-200" : "text-slate-600"
+                isSelected ? "text-blue-600" : "text-slate-600"
               }`}
             >
               {shift.startAt} – {shift.endAt}
@@ -111,7 +125,7 @@ function ShiftCard({
         {(expanded || height >= 80) && (
           <span
             className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium ${
-              isSelected ? "bg-white/15 text-white" : "bg-slate-100 text-slate-600"
+              isSelected ? "bg-blue-100 text-blue-700" : "bg-slate-100 text-slate-600"
             }`}
           >
             {TIME_LABELS[shift.time]}
@@ -237,25 +251,37 @@ export default function ShiftList() {
             }`}
             style={{ height: timelineHeightPx }}
           >
-            {visibleAreas.map((area) => (
-              <div
-                key={area}
-                className={`relative border-r border-slate-100 last:border-r-0 ${
-                  isAreaFiltered ? "" : "min-w-[120px]"
-                }`}
-              >
-                <TimelineGridLines />
-                {shiftsByArea[area].map((shift) => (
-                  <ShiftCard
-                    key={shift.id}
-                    shift={shift}
-                    expanded={isAreaFiltered}
-                    isSelected={selectedShiftId === shift.id}
-                    onSelect={() => setSelectedShiftId(shift.id)}
-                  />
-                ))}
-              </div>
-            ))}
+            {visibleAreas.map((area) => {
+              const laneLayouts = computeShiftLanes(shiftsByArea[area]);
+
+              return (
+                <div
+                  key={area}
+                  className={`relative border-r border-slate-100 last:border-r-0 ${
+                    isAreaFiltered ? "" : "min-w-[120px]"
+                  }`}
+                >
+                  <TimelineGridLines />
+                  {shiftsByArea[area].map((shift) => (
+                    <ShiftCard
+                      key={shift.id}
+                      shift={shift}
+                      lane={
+                        laneLayouts.get(shift.id) ?? {
+                          columnIndex: 0,
+                          totalColumns: 1,
+                          leftPercent: 0,
+                          widthPercent: 100,
+                        }
+                      }
+                      expanded={isAreaFiltered}
+                      isSelected={selectedShiftId === shift.id}
+                      onSelect={() => setSelectedShiftId(shift.id)}
+                    />
+                  ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
