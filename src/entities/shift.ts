@@ -1,5 +1,6 @@
 import type { StoreShift } from "./types";
 
+//test용 mock data 모음
 export const mockShifts: StoreShift[] = [
   // 2026-06-25 (5건)
   {

@@ -1,7 +1,18 @@
 import type { StoreShift } from "@/entities/types";
 
+//구역 관련 상수
+
 export type AreaFilter = "all" | StoreShift["area"];
 
+//구역 순서
+export const AREA_ORDER: StoreShift["area"][] = [
+  "cashier",
+  "display",
+  "storage",
+  "support",
+];
+
+//구역 라벨
 export const AREA_LABELS: Record<StoreShift["area"], string> = {
   cashier: "계산대",
   display: "진열",
@@ -9,6 +20,7 @@ export const AREA_LABELS: Record<StoreShift["area"], string> = {
   support: "고객 응대",
 };
 
+//구역 필터 옵션
 export const AREA_FILTER_OPTIONS: { value: AreaFilter; label: string }[] = [
   { value: "all", label: "전체" },
   { value: "cashier", label: AREA_LABELS.cashier },
@@ -17,12 +29,14 @@ export const AREA_FILTER_OPTIONS: { value: AreaFilter; label: string }[] = [
   { value: "support", label: AREA_LABELS.support },
 ];
 
+//근무 시간 라벨
 export const TIME_LABELS: Record<StoreShift["time"], string> = {
   morning: "오전",
   afternoon: "오후",
   closing: "마감",
 };
 
+//구역 색상 : 사용자가 선택한 구역 강조
 export const AREA_COLORS: Record<
   StoreShift["area"],
   { bg: string; text: string; border: string; dot: string }

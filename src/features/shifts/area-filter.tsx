@@ -1,5 +1,6 @@
 "use client";
 
+//구역 필터 컴포넌트
 import { AREA_FILTER_OPTIONS } from "./constants";
 import { useShiftPlannerStore } from "./store";
 

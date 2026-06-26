@@ -4,7 +4,6 @@ import AreaFilter from "@/features/shifts/area-filter";
 import DateSelector from "@/features/shifts/date-selector";
 import ShiftDetail from "@/features/shifts/shift-detail";
 import ShiftList from "@/features/shifts/shift-list";
-import ShiftMemo from "@/features/shifts/shift-memo";
 import ShiftSummary from "@/features/shifts/shift-summary";
 
 export default function ShiftPlannerDashboard() {
@@ -54,7 +53,6 @@ export default function ShiftPlannerDashboard() {
               </h2>
               <ShiftDetail />
             </div>
-            <ShiftMemo />
           </aside>
         </div>
       </main>
