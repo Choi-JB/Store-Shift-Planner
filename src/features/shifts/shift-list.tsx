@@ -6,14 +6,14 @@ import {
   AREA_COLORS,
   AREA_LABELS,
   AREA_ORDER,
-  TIME_LABELS,
+  TIME_LABELS,  
 } from "./constants";
-import { useShiftPlannerStore } from "./store";
+import { useShiftPlannerStore } from "@/store/store";
 import {
   computeShiftLanes,
   getShiftsByDate,
   type ShiftLaneLayout,
-} from "./utils";
+} from "@/shared/utils";
 
 const TIMETABLE_START_HOUR = 8;
 const TIMETABLE_END_HOUR = 23;

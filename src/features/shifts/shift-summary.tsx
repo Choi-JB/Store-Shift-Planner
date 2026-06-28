@@ -3,8 +3,8 @@
 //근무 요약 컴포넌트 : 근무 구역별 근무 인원 수를 표시하는 컴포넌트
 
 import { AREA_COLORS } from "./constants";
-import { useShiftPlannerStore } from "./store";
-import { getAreaSummary } from "./utils";
+import { useShiftPlannerStore } from "@/store/store";
+import { getAreaSummary } from "@/shared/utils";
 
 export default function ShiftSummary() {
   const selectedDate = useShiftPlannerStore((s) => s.selectedDate);

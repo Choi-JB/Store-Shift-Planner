@@ -6,8 +6,8 @@ import {
   AREA_LABELS,
   TIME_LABELS,
 } from "./constants";
-import { useShiftPlannerStore } from "./store";
-import { formatDateLabel, getShiftById } from "./utils";
+import { useShiftPlannerStore } from "@/store/store";
+import { formatDateLabel, getShiftById } from "@/shared/utils";
 
 export default function ShiftDetail() {
   const selectedShiftId = useShiftPlannerStore((s) => s.selectedShiftId);

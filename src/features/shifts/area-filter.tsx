@@ -2,7 +2,7 @@
 
 //구역 필터 컴포넌트
 import { AREA_FILTER_OPTIONS } from "./constants";
-import { useShiftPlannerStore } from "./store";
+import { useShiftPlannerStore } from "@/store/store";
 
 export default function AreaFilter() {
   const selectedArea = useShiftPlannerStore((s) => s.selectedArea);

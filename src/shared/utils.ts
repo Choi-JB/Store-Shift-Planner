@@ -1,7 +1,7 @@
 import { mockShifts } from "@/entities/shift";
 import type { StoreShift } from "@/entities/types";
-import type { AreaFilter } from "./constants";
-import { AREA_LABELS } from "./constants";
+import type { AreaFilter } from "../features/shifts/constants";
+import { AREA_LABELS } from "../features/shifts/constants";
 
 //날짜 포맷팅 함수 : 2026-06-25 -> 2026년 6월 25일 (수)
 export function formatDateLabel(dateStr: string): string {

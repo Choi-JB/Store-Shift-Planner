@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { AreaFilter } from "./constants";
+import type { AreaFilter } from "@/features/shifts/constants";
 
 //shift planner 상태 관리
 type ShiftPlannerState = {

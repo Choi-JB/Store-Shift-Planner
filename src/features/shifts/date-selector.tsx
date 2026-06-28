@@ -2,8 +2,8 @@
 
 //날짜 선택 컴포넌트
 import { useEffect, useRef, useState } from "react";
-import { useShiftPlannerStore } from "./store";
-import { formatDateLabel, getShiftDates, toDateString } from "./utils";
+import { useShiftPlannerStore } from "@/store/store";
+import { formatDateLabel, getShiftDates, toDateString } from "../../shared/utils";
 
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 
