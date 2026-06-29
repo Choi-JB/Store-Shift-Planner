@@ -14,11 +14,12 @@ export default function ShiftDetail() {
   const selectedShiftId = useShiftPlannerStore((s) => s.selectedShiftId);
   const registeredNotes = useShiftPlannerStore((s) => s.registeredNotes);
   const setRegisteredNote = useShiftPlannerStore((s) => s.setRegisteredNote);
-  const shift = selectedShiftId ? getShiftById(selectedShiftId) : null;
+  const shift = selectedShiftId ? getShiftById(selectedShiftId) : null; //현재 선택된 근무카드(클릭된)의 상세 정보
 
   const [isMemoModalOpen, setIsMemoModalOpen] = useState(false);
   const [draftMemo, setDraftMemo] = useState("");
 
+  //현재 선택된 근무카드(클릭된)가 없을 때 빈 상태 표시
   if (!shift) {
     return (
       <div className="flex h-full min-h-48 flex-col items-center justify-center rounded-xl border border-dashed border-slate-200 bg-slate-50 p-6 text-center">
@@ -36,16 +37,19 @@ export default function ShiftDetail() {
   const colors = AREA_COLORS[shift.area];
   const displayNote = registeredNotes[shift.id] ?? shift.note ?? "";
 
+  //메모 편집 모달 창 열기
   const openMemoModal = () => {
     setDraftMemo(displayNote);
     setIsMemoModalOpen(true);
   };
 
+  //메모 저장
   const handleSaveMemo = () => {
     setRegisteredNote(shift.id, draftMemo.trim());
     setIsMemoModalOpen(false);
   };
 
+  //메모 취소
   const handleCancelMemo = () => {
     setIsMemoModalOpen(false);
   };

@@ -174,6 +174,7 @@ export default function DateSelector() {
   );
 }
 
+//근무가 있는 날짜 표시 아이콘
 function CalendarIcon() {
   return (
     <svg
@@ -192,6 +193,7 @@ function CalendarIcon() {
   );
 }
 
+//현재 선택된 날짜 표시 아이콘
 function ChevronIcon({ open }: { open: boolean }) {
   return (
     <svg

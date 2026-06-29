@@ -18,7 +18,7 @@ export default function ShiftSummary() {
         총 근무 {summary.total}명
       </span>
 
-      {/* 해당 구역의 근무자가 있을 경우 요약 정보를 표시 : 근무 구역, 근무 인원 수 */}
+      {/* 해당 구역의 근무자가 있을 경우 요약 정보를 표시 : 근무 구역 별 근무 인원 수 */}
       {activeAreas.map(({ area, label, count }) => {
         const colors = AREA_COLORS[area];
 
