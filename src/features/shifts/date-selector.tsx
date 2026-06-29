@@ -3,7 +3,7 @@
 //날짜 선택 컴포넌트
 import { useEffect, useRef, useState } from "react";
 import { useShiftPlannerStore } from "@/store/store";
-import { formatDateLabel, getShiftDates, toDateString } from "../../shared/utils";
+import { formatDateLabel, getShiftDates, toDateString } from "@/shared/utils";
 
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -19,7 +19,7 @@ export default function DateSelector() {
 
   const shiftDates = new Set(getShiftDates());
 
-   //사용자가 달력창을 열어 날짜를 선택할 때
+   //사용자가 달력창을 열어 날짜를 선택할 때 선택한 날짜를 달력에 표시하는 이벤트 핸들러
   useEffect(() => {
     if (!open) return;
     const [y, m] = selectedDate.split("-").map(Number);

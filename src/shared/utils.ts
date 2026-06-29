@@ -1,7 +1,9 @@
 import { mockShifts } from "@/entities/shift";
 import type { StoreShift } from "@/entities/types";
-import type { AreaFilter } from "../features/shifts/constants";
-import { AREA_LABELS } from "../features/shifts/constants";
+import type { AreaFilter } from "@/entities/constants";
+import { AREA_LABELS } from "@/entities/constants";
+
+//공통적으로 쓸만한 함수들을 모아둔 파일
 
 //날짜 포맷팅 함수 : 2026-06-25 -> 2026년 6월 25일 (수)
 export function formatDateLabel(dateStr: string): string {
@@ -21,7 +23,7 @@ export function getShiftDates(): string[] {
   return [...new Set(mockShifts.map((shift) => shift.date))].sort();
 }
 
-//근무 날짜별 근무 목록 조회 함수 : 2026-06-25, "cashier" -> 2026-06-25 계산대 근무자 목록
+//근무 날짜별 근무 목록 조회 함수 : (2026-06-25, "cashier") -> 2026-06-25, 계산대 근무자 목록
 export function getShiftsByDate(
   date: string,
   area: AreaFilter = "all",
@@ -59,6 +61,8 @@ export function getShiftById(id: string): StoreShift | undefined {
   return mockShifts.find((shift) => shift.id === id);
 }
 
+
+//========이 아래로 근무자 리스트를 시간에 맞춰 배치 및 겹치는 근무 카드의 가로 배치(레인) 계산하는 함수 =============
 export type ShiftLaneLayout = {
   columnIndex: number;
   totalColumns: number;

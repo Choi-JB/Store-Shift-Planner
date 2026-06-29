@@ -25,7 +25,9 @@ npm run dev
 src/
 ├── app/          # Next.js 페이지, 레이아웃
 ├── entities/     # Shift 타입, mock 데이터
-├── features/shifts/  # 날짜 선택, 필터, 목록, 상세, store, utils
+├── features/shifts/  # 컴포넌트 : 날짜 선택, 필터, 목록, 상세
+├── share/  # util 공용 사용 함수
+├── store/  # 전역 상태 저장(zustand)
 └── widgets/      # 대시보드 조합
 
 ## 데이터

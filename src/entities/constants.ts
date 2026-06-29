@@ -1,6 +1,6 @@
 import type { StoreShift } from "@/entities/types";
 
-//구역 관련 상수
+//구역(필터) 관련 상수, 라벨, 옵션
 
 export type AreaFilter = "all" | StoreShift["area"];
 
@@ -36,7 +36,7 @@ export const TIME_LABELS: Record<StoreShift["time"], string> = {
   closing: "마감",
 };
 
-//구역 색상 : 사용자가 선택한 구역 강조
+//구역 색상 : 사용자가 선택한 구역 강조(css용 클래스 이름값)
 export const AREA_COLORS: Record<
   StoreShift["area"],
   { bg: string; text: string; border: string; dot: string }

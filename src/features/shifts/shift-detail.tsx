@@ -1,14 +1,15 @@
 "use client";
-//근무 상세 컴포넌트 : 사용자가 근무 카드를 클릭 했을 때 뜨는 추가 정보 창
+
 import { useState } from "react";
 import {
   AREA_COLORS,
   AREA_LABELS,
   TIME_LABELS,
-} from "./constants";
+} from "@/entities/constants";
 import { useShiftPlannerStore } from "@/store/store";
 import { formatDateLabel, getShiftById } from "@/shared/utils";
 
+//근무 상세 컴포넌트 : 사용자가 근무 카드를 클릭 했을 때 뜨는 상세 정보 창
 export default function ShiftDetail() {
   const selectedShiftId = useShiftPlannerStore((s) => s.selectedShiftId);
   const registeredNotes = useShiftPlannerStore((s) => s.registeredNotes);

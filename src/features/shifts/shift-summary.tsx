@@ -2,7 +2,7 @@
 
 //근무 요약 컴포넌트 : 근무 구역별 근무 인원 수를 표시하는 컴포넌트
 
-import { AREA_COLORS } from "./constants";
+import { AREA_COLORS } from "@/entities/constants";
 import { useShiftPlannerStore } from "@/store/store";
 import { getAreaSummary } from "@/shared/utils";
 

@@ -7,7 +7,7 @@ import {
   AREA_LABELS,
   AREA_ORDER,
   TIME_LABELS,  
-} from "./constants";
+} from "@/entities/constants";
 import { useShiftPlannerStore } from "@/store/store";
 import {
   computeShiftLanes,
@@ -157,16 +157,18 @@ function TimelineGridLines() {
 
 //근무 목록 컴포넌트 : 근무 카드 목록을 표시하는 컴포넌트
 export default function ShiftList() {
-  const selectedDate = useShiftPlannerStore((s) => s.selectedDate);
-  const selectedArea = useShiftPlannerStore((s) => s.selectedArea);
-  const selectedShiftId = useShiftPlannerStore((s) => s.selectedShiftId);
+  const selectedDate = useShiftPlannerStore((s) => s.selectedDate); //선택된 날짜
+  const selectedArea = useShiftPlannerStore((s) => s.selectedArea); //선택된 필터(근무 구역)
+  const selectedShiftId = useShiftPlannerStore((s) => s.selectedShiftId); //선택된 근무카드(클릭된)
   const setSelectedShiftId = useShiftPlannerStore((s) => s.setSelectedShiftId);
 
-  //선택된 필터(근무 구역)에 해당하는 근무 카드만 표시
+  //선택된 날짜와 필터(근무 구역)에 해당하는 근무 카드만 표시
   const shifts = getShiftsByDate(selectedDate, selectedArea);
+  //필터(근무 구역) 선택 여부
   const isAreaFiltered = selectedArea !== "all";
+  //필터(근무 구역) 선택 후 보이는 구역별 목록
   const visibleAreas = isAreaFiltered ? [selectedArea] : AREA_ORDER;
-  //근무 구역별 근무 카드 목록 생성
+  //근무 구역별(필터에 따라) 근무 카드 목록 생성
   const shiftsByArea = AREA_ORDER.reduce(
     (acc, area) => {
       acc[area] = shifts
